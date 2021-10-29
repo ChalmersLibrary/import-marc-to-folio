@@ -1,4 +1,4 @@
-# Import marc data to folio
+# Import marc to folio
 Two scripts to simplify testing of importing marc data to FOLIO.
 
 ## Setup
