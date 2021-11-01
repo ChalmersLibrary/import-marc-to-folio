@@ -42,7 +42,7 @@ tmpfile2=`mktemp`
 trap 'rm -f $tmpfile1 $tmpfile2' 1 15 0
 
 echo "=== Stage 1 ==="
-curl --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions" \
+curl --http1.1 --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions" \
 	--header "Content-Type: application/json" \
 	--header "X-Okapi-Tenant: $OKAPI_TENANT" \
 	--header "X-Okapi-Token: $OKAPI_TOKEN" \
@@ -56,7 +56,7 @@ fileDefinitionId=`jq -r -M '.fileDefinitions[0].id' $tmpfile1`
 # echo "fileDefinitionId=$fileDefinitionId"
 
 echo "=== Stage 2 ==="
-curl --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions/$uploadDefinitionId/files/$fileDefinitionId" \
+curl --http1.1 --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions/$uploadDefinitionId/files/$fileDefinitionId" \
 	--header "Content-Type: application/octet-stream" \
 	--header "X-Okapi-Tenant: $OKAPI_TENANT" \
 	--header "X-Okapi-Token: $OKAPI_TOKEN" \
@@ -64,7 +64,7 @@ curl --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinition
 		> $tmpfile2
 
 echo "=== Stage 3 ==="
-curl -i --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions/$uploadDefinitionId/processFiles?defaultMapping=true" \
+curl --http1.1 -i --silent --location --request POST "$OKAPI_URL/data-import/uploadDefinitions/$uploadDefinitionId/processFiles?defaultMapping=true" \
 	--header "Content-Type: application/json" \
 	--header "X-Okapi-Tenant: $OKAPI_TENANT" \
 	--header "X-Okapi-Token: $OKAPI_TOKEN" \
