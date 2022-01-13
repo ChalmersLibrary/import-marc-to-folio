@@ -1,4 +1,4 @@
 .env
 .okapi-token
-.mrc
-.marc
+*.mrc
+*.marc
