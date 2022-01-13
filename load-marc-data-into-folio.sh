@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # First log into a back-end FOLIO system. storing the Okapi URL,
 # tenant and token in the file `.okapi` in the home directory:
